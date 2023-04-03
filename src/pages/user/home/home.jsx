@@ -1,13 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import NavBar from "../../../components/navbar/navBar";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-import { Box, DialogActions, Typography } from "@mui/material";
+import { DialogActions, Typography } from "@mui/material";
 import CustomButton from "../../../components/button/Button";
 import classes from "./home.module.css";
+import TaskList from "../../../components/task-list/taskList";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -15,6 +16,7 @@ export default function Home() {
    // Controlled Forms
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [isTaskAdded, setTaskAdded] = useState({});
 
 
 
@@ -42,15 +44,15 @@ export default function Home() {
     let taskList = JSON.parse(localStorage.getItem('tasklist')) || [];
     taskList.push(newTask);
     localStorage.setItem('tasklist', JSON.stringify(taskList));
-
-    setOpen(false);
+    setTaskAdded(newTask);
+    handleClose();
 
   }
 
   return (
     <>
       <NavBar />
-
+      <TaskList isTaskAdded={isTaskAdded} />
       <div className={classes.addButton}>
         <Fab
           color="warning"

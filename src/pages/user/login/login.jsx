@@ -16,6 +16,7 @@ export default function Login() {
   const loginButtonClicked = (e) => {
     console.log('called');
     e.preventDefault();
+    navigate('/user/home')
 
     let userList = JSON.parse(localStorage.getItem('userlist'));
     

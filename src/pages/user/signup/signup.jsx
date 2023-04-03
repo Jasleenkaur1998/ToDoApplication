@@ -14,12 +14,10 @@ export default function Signup(props) {
   const navigate = useNavigate();
 
   const handleName = (event) => {
-    console.log(event.target.value);
     setName(event.target.value);
   };
 
   const handleEmail = (event) => {
-    console.log(event.target.value);
     setEmail(event.target.value);
   };
 
@@ -28,6 +26,25 @@ export default function Signup(props) {
   };
 
   const signupButtonClicked = () => {
+
+    const newUser = {
+      email: email,
+      name: name,
+      password: password 
+    }
+
+    let userList = JSON.parse(localStorage.getItem('userlist')) || [];
+    userList.push(newUser);
+
+    // let userList = JSON.parse(localStorage.getItem('userlist'));
+    // if (userList) {
+    //   userList.push(newUser);
+    // } else {
+    //   userList = [newUser];
+    // }
+
+    localStorage.setItem('userlist', JSON.stringify(userList));
+
     navigate("/user/login");
   };
 
@@ -52,9 +69,10 @@ export default function Signup(props) {
         />
         <TextField
           id="standard-basic"
-          label="Username"
+          label="Email"
+          type="email"
           variant="outlined"
-          placeholder="Enter your username"
+          placeholder="Enter your Email"
           onChange={handleEmail}
         />
         <TextField

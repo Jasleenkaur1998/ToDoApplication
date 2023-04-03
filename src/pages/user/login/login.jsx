@@ -13,10 +13,27 @@ export default function Login() {
  // React router gives a hook where we can programmatically send a user to different page
  const navigate = useNavigate();
 
-  const loginButtonClicked = () => {
-    console.log(email);
-    console.log(password);
-    navigate('/user/home');
+  const loginButtonClicked = (e) => {
+    console.log('called');
+    e.preventDefault();
+
+    let userList = JSON.parse(localStorage.getItem('userlist'));
+    
+    // for (let i = 0 ; i < userList.length; i++) {
+    //   if (userList[i].email === email) {
+    //     if (userList[i].password === password) {
+    //       navigate('/user/home');
+    //       alert('Logged In succesfully');
+    //       break;
+    //     } else {
+    //       alert("Incorrect Password");
+    //       break;
+    //     }
+    //   } else {
+    //     alert("user not found");
+    //     break;
+    //   }
+    // }
   };
 
   const handleEmail = (event) => {
